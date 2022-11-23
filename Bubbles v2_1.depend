@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1667687290 source:c:\users\brygo\onedrive\dokumenty\projects codeblocks\bubbles v2_1\src\bubble.cpp
+1669236336 source:c:\users\brygo\onedrive\dokumenty\projects codeblocks\bubbles v2_1\src\bubble.cpp
 	"bubble.h"
 	<math.h>
 
@@ -416,7 +416,7 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1667410283 source:c:\users\brygo\onedrive\dokumenty\projects codeblocks\bubbles v2_1\src\main.cpp
+1669227207 source:c:\users\brygo\onedrive\dokumenty\projects codeblocks\bubbles v2_1\src\main.cpp
 	<iostream>
 	<SFML/Graphics.hpp>
 	"bubble.h"
