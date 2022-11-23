@@ -7,7 +7,7 @@ using namespace std;
 Bubble::Bubble(sf::Vector2f pos)
 {
     bubblePosition = pos;
-    r=rand()%20+10;
+    r=rand()%20+30;
     bubbleColor=sf::Color(rand()%255,rand()%255,rand()%255);
     setOutlineColor(bubbleColor);
     setFillColor(bubbleColor-sf::Color(0,0,0,alpha));
@@ -23,7 +23,7 @@ Bubble::Bubble(sf::Vector2f pos, sf::Vector2f mov)
 {
 
     bubblePosition = mov;
-    r=rand()%20+10;
+    r=rand()%20+30;
     bubbleColor=sf::Color(rand()%255,rand()%255,rand()%255);
     setOutlineColor(bubbleColor);
     setFillColor(bubbleColor-sf::Color(0,0,0,alpha));
@@ -44,7 +44,7 @@ void Bubble::moveBubble(Bubble &target, int width, int height)
 {
     target.move(bubbleMove);
 /*
-// when I used that code have bug when mov point is closer window edge than r - bubbles are glued to the window edge
+// when I used that code, have bug when mov point is closer window edge than r - bubbles are glued to the window edge
 
 
     if (target.getPosition().x - r <= 0 || target.getPosition().x + r >= width)
@@ -57,25 +57,10 @@ void Bubble::moveBubble(Bubble &target, int width, int height)
     };
 */
 
-    if (target.getPosition().x - r <= 0)
-    {
-        bubbleMove.x=abs(bubbleMove.x);
-    };
-
-    if (target.getPosition().x + r >= width)
-    {
-        bubbleMove.x=abs(bubbleMove.x)*(-1);
-    };
-
-    if (target.getPosition().y - r <= 0)
-    {
-        bubbleMove.y=abs(bubbleMove.y);
-    };
-
-    if (target.getPosition().y + r >= height)
-    {
-        bubbleMove.y=abs(bubbleMove.y)*(-1);
-    };
+    if (target.getPosition().x - r <= 0)       bubbleMove.x=abs(bubbleMove.x);
+    if (target.getPosition().x + r >= width)   bubbleMove.x=abs(bubbleMove.x)*(-1);
+    if (target.getPosition().y - r <= 0)       bubbleMove.y=abs(bubbleMove.y);
+    if (target.getPosition().y + r >= height)  bubbleMove.y=abs(bubbleMove.y)*(-1);
 }
 
 bool Bubble::isCollision(Bubble &target)
@@ -85,10 +70,18 @@ bool Bubble::isCollision(Bubble &target)
 
     if (distance <= minDistance)
     {
-        bubbleMove.x=bubbleMove.x*(-1);
-        bubbleMove.y=bubbleMove.y*(-1);
-        target.bubbleMove.x=target.bubbleMove.x*(-1);
-        target.bubbleMove.y=target.bubbleMove.y*(-1);
+        // simplified ball reflections - assumed the same mass of all balls
+        sf::Vector2f temp;
+
+        temp.x=bubbleMove.x;
+        temp.y=bubbleMove.y;
+
+        bubbleMove.x=target.bubbleMove.x;
+        bubbleMove.y=target.bubbleMove.y;
+
+        target.bubbleMove.x=temp.x;
+        target.bubbleMove.y=temp.y;
+
         return true;
     }
     return false;

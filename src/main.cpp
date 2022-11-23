@@ -102,7 +102,6 @@ int main()
                     cout<<"Collisions enabled"<<endl;
                 }
             }
-
         }
         backgroundColor.colorSmoothChange();
         window.clear(backgroundColor.actualColor);
